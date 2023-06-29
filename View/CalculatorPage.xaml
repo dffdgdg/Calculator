@@ -1,0 +1,297 @@
+﻿<ui:UiPage   x:Class="Calculator.View.CalculatorPage"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:vm="clr-namespace:Calculator.ViewModel" xmlns:uc="clr-namespace:Calculator.View"
+             mc:Ignorable="d" 
+             Foreground="{DynamicResource TextFillColorPrimaryBrush}">
+    <ui:UiPage.DataContext>
+        <vm:CalculatorVM/>
+    </ui:UiPage.DataContext>
+    <ui:UiPage.Resources>
+        <Style TargetType="{x:Type ui:Button}" BasedOn="{StaticResource {x:Type ui:Button}}">
+            <Setter Property="HorizontalAlignment" Value="Stretch"/>
+            <Setter Property="VerticalAlignment" Value="Stretch"/>
+            <Setter Property="Margin" Value="2"/>
+        </Style>
+    </ui:UiPage.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50" />
+            <RowDefinition Height="2*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="5" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="5" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="5" />
+        </Grid.ColumnDefinitions>
+        <!-- Input Area -->
+        <ui:Button Grid.Column="4" Icon="DarkTheme24" 
+                   Command="{Binding ThemeSet}" Margin="10"
+                   IconFilled="True"/>
+        <ui:Button Icon="History24" IconFilled="True" Grid.Column="5" Command="{Binding ViewHistoryCommand}" Margin="10"/>
+        <Border Padding="6,0,4,0" Margin="8,12" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="5" BorderBrush="{DynamicResource ControlElevationBorderBrush}" BorderThickness="2" CornerRadius="6">
+            <Label VerticalContentAlignment="Center" FontSize="32" >
+                <Label.Content>
+                    <TextBlock>
+                <Run Text="{Binding InputContent}" />
+                <Run Text="│" FontSize="28"/>
+                <Run Text=" "/>
+                    </TextBlock>
+                </Label.Content>
+            </Label>
+        </Border>
+        <!-- Answer Row -->
+        <Grid            
+            Grid.Row="2"
+            Grid.Column="1"
+            Grid.ColumnSpan="5">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Label
+                Content="=" FontSize="28"
+                VerticalContentAlignment="Center"
+                Margin="16,0,5,0"/>
+            <Label
+                Content="{Binding CalculatedResult, Mode=OneWay}"
+                VerticalContentAlignment="Center"
+                Grid.Column="2"
+                Margin="0,0" FontSize="28" FontWeight="Bold"/>
+        </Grid>
+        <!-- Scientific Operators -->
+        <!-- Row 1 -->
+        <!-- Row 2 -->
+        <ui:Button
+            Grid.Row="3"
+            Grid.Column="1"
+            
+            Content="SIN"
+            Command="{Binding ScientificOperatorCommand}"
+            CommandParameter="SIN" />
+        <ui:Button
+            Grid.Row="3"
+            Grid.Column="2"
+
+            Content="COS"
+            Command="{Binding ScientificOperatorCommand}"
+            CommandParameter="COS" />
+        <ui:Button
+            Grid.Row="3"
+            Grid.Column="3"
+
+            Content="TAN"
+            Command="{Binding ScientificOperatorCommand}"
+            CommandParameter="TAN" />
+        <ui:Button
+            Grid.Row="3"
+            Grid.Column="4"
+
+            Content="LOG"
+            Command="{Binding ScientificOperatorCommand}"
+            CommandParameter="LOG" />
+        <ui:Button
+            Grid.Row="3"
+            Grid.Column="5"
+            Content="EXP"
+            Command="{Binding ScientificOperatorCommand}"
+            CommandParameter="EXP" />
+        <!-- Row 3 -->
+        <ui:Button
+            Grid.Row="4"
+            Grid.Column="1"
+            Content="ASIN"
+            Command="{Binding ScientificOperatorCommand}"
+            CommandParameter="ASIN" />
+        <ui:Button
+            Grid.Row="4"
+            Grid.Column="2"
+            Content="ACOS"
+            Command="{Binding ScientificOperatorCommand}"
+            CommandParameter="ACOS" />
+        <ui:Button
+            Grid.Row="4"
+            Grid.Column="3"
+            Content="ATAN"
+            Command="{Binding ScientificOperatorCommand}"
+            CommandParameter="ATAN" />
+        <ui:Button
+            Grid.Row="4"
+            Grid.Column="4"
+            Content="LOG10"
+            Command="{Binding ScientificOperatorCommand}"
+            CommandParameter="LOG10" />
+        <ui:Button
+            Grid.Row="4"
+            Grid.Column="5"
+            Content="POW"
+            Command="{Binding ScientificOperatorCommand}"
+            CommandParameter="POW" />
+        <!-- Row 4 -->
+        <ui:Button
+            Grid.Row="5"
+            Grid.Column="1"
+            Content="SQRT"
+            Command="{Binding ScientificOperatorCommand}"
+            CommandParameter="SQRT" />
+        <ui:Button
+            Grid.Row="5"
+            Grid.Column="2"
+            Content="ABS"
+            Command="{Binding ScientificOperatorCommand}"
+            CommandParameter="ABS" />
+
+        <ui:Button
+            Grid.Row="5"
+            Grid.Column="3"
+            Content=","
+            Command="{Binding RegionOperatorCommand}"
+            CommandParameter="," />
+        <ui:Button
+            Grid.Row="5"
+            Grid.Column="4"
+            Content="("
+            Command="{Binding RegionOperatorCommand}"
+            CommandParameter="(" />
+        <ui:Button
+            Grid.Row="5"
+            Grid.Column="5"
+            Content=")"
+            Command="{Binding RegionOperatorCommand}"
+            CommandParameter=")" />
+        <!-- Mathematical Operators -->
+        <ui:Button
+            Grid.Row="6"
+            Grid.Column="4"
+            Grid.ColumnSpan="2"
+            Content="AC"
+            Appearance="Secondary"
+            Command="{Binding ResetCommand}" />
+        <ui:Button
+            Grid.Row="7"
+            Grid.Column="4"
+            Content="×"
+            Command="{Binding MathOperatorCommand}"
+            Appearance="Secondary"
+            CommandParameter="×"/>
+        <ui:Button
+            Grid.Row="7"
+            Grid.Column="5"
+            Content="÷"
+            Appearance="Secondary"
+            Command="{Binding MathOperatorCommand}"
+            CommandParameter="÷"/>
+        <ui:Button
+            Grid.Row="8"
+            Grid.Column="4"
+            Content="+"
+            Command="{Binding MathOperatorCommand}"
+            Appearance="Secondary"
+            CommandParameter="+"/>
+        <ui:Button
+            Grid.Row="8"
+            Grid.Column="5"
+            Content="-"
+            Command="{Binding MathOperatorCommand}"
+            Appearance="Secondary"
+            CommandParameter="-"/>
+        <ui:Button
+            Grid.Row="9"
+            Grid.Column="4"
+            Grid.ColumnSpan="2"
+            Content="="
+            FontSize="28"
+            Appearance="Primary"
+            Command="{Binding CalculateCommand}" />
+        <!-- Numbers Input -->
+        <ui:Button
+            Grid.Row="6"
+            Grid.Column="1"
+            Content="7"
+            Command="{Binding NumberInputCommand}"
+            CommandParameter="7" />
+        <ui:Button
+            Grid.Row="6"
+            Grid.Column="2"
+            Content="8"
+            Appearance="Secondary"
+            Command="{Binding NumberInputCommand}"
+            CommandParameter="8" />
+        <ui:Button
+            Grid.Row="6"
+            Grid.Column="3"
+            Content="9"
+            Command="{Binding NumberInputCommand}"
+            CommandParameter="9" />
+        <ui:Button
+            Grid.Row="7"
+            Grid.Column="1"
+            Content="4"
+            Command="{Binding NumberInputCommand}"
+            CommandParameter="4" />
+        <ui:Button
+            Grid.Row="7"
+            Grid.Column="2"
+            Content="5"
+            Command="{Binding NumberInputCommand}"
+            CommandParameter="5" />
+        <ui:Button
+            Grid.Row="7"
+            Grid.Column="3"
+            Content="6"
+            Command="{Binding NumberInputCommand}"
+            CommandParameter="6" />
+        <ui:Button
+            Grid.Row="8"
+            Grid.Column="1"
+            Content="1"
+            Command="{Binding NumberInputCommand}"
+            CommandParameter="1" />
+        <ui:Button
+            Grid.Row="8"
+            Grid.Column="2"
+            Content="2"
+            Command="{Binding NumberInputCommand}"
+            CommandParameter="2" />
+        <ui:Button
+            Grid.Row="8"
+            Grid.Column="3"
+            Content="3"
+            Command="{Binding NumberInputCommand}"
+            CommandParameter="3" />
+        <ui:Button
+            Grid.Row="9"
+            Grid.Column="1"
+            Content="0"
+            Command="{Binding NumberInputCommand}"
+            CommandParameter="0" />
+        <ui:Button
+            Grid.Row="9"
+            Grid.Column="2"
+            Content="."
+            Command="{Binding NumberInputCommand}"
+            CommandParameter="." />
+        <ui:Button
+            Grid.Row="9"
+            Grid.Column="3"
+            Content="⌫"
+            Command="{Binding BackspaceCommand}" />
+        <uc:CalcHistoryUC Visibility="{Binding UCVisibility}" DataContext="{Binding DataContext, RelativeSource={RelativeSource AncestorType=Grid}}" Grid.ColumnSpan="12" Grid.RowSpan="12"/>
+    </Grid>
+</ui:UiPage>
